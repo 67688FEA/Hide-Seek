@@ -5,6 +5,7 @@ using UnityEngine;
 public class SeekerController : MonoBehaviour {
 
     public float moveSpeed = 2.0f;
+    public float rotateSpeed = 10.0f;
     public float gravity = 20.0f;
 
     private float horizontal;
@@ -28,11 +29,12 @@ public class SeekerController : MonoBehaviour {
         if (controller.isGrounded)
         {
             animator.SetFloat("Speed", speed);
-            moveDirection = new Vector3(horizontal, 0, vertical);
+            moveDirection = new Vector3(0, 0, vertical);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= moveSpeed;
         }
         moveDirection.y -= gravity * Time.deltaTime;
+        transform.Rotate(Vector3.up, horizontal * rotateSpeed * Time.deltaTime, Space.Self);
         controller.Move(moveDirection * Time.deltaTime);
 	}
 }
