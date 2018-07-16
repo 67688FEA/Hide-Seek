@@ -9,7 +9,8 @@ public class CameraController : MonoBehaviour {
     public float smooth;
 
     private GameObject hovercraft;   
-    private Vector3 targetPosition;   
+    private Vector3 targetPosition;
+    private Quaternion targetRotation;
 
     Transform follow;
 
@@ -20,9 +21,10 @@ public class CameraController : MonoBehaviour {
 
     void LateUpdate()
     {
-        targetPosition = follow.position + Vector3.up * distanceUp - follow.forward * distanceAway;                                   
+        targetPosition = follow.position + (follow.up * distanceUp) - (follow.forward * distanceAway);
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smooth);
-        transform.LookAt(follow);
+        targetRotation = follow.rotation;
+        transform.rotation = targetRotation;
+        transform.Rotate(new Vector3(17f, 0, 0));
     }
-
 }
