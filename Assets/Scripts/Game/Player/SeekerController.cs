@@ -36,5 +36,5 @@ public class SeekerController : MonoBehaviour {
         moveDirection.y -= gravity * Time.deltaTime;
         transform.Rotate(Vector3.up, horizontal * rotateSpeed * Time.deltaTime, Space.Self);
         controller.Move(moveDirection * Time.deltaTime);
-	}
+    }
 }
