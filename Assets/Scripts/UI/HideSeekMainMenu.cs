@@ -14,6 +14,18 @@ public class HideSeekMainMenu : MonoBehaviour {
     public Transform defaultPoint;
     public Transform charactorPoint;
     public GameObject background;
+    public GameObject characterTransform;
+    public string currentAnimation="ScrollThirdCharacter";
+
+    private Animation backgroundAnimation;
+    private Animation characterAnimation;
+
+
+    private void Start()
+    {
+        backgroundAnimation = background.GetComponent<Animation>();
+        characterAnimation = characterTransform.GetComponent<Animation>();
+    }
 
     public void OnCharactorChooseClick()
     {
@@ -22,8 +34,8 @@ public class HideSeekMainMenu : MonoBehaviour {
         charactorChoose.SetActive(true);
         charactorDescription.SetActive(true);
         charactorChooseButton.SetActive(true);
-        background.transform.position = Vector3.Lerp(background.transform.position, charactorPoint.position, 2f);
-        background.transform.rotation = charactorPoint.rotation;
+        characterTransform.SetActive(true);
+        backgroundAnimation.Play("StartMenu");
 
     }
     public void OnBackClick()
@@ -33,8 +45,98 @@ public class HideSeekMainMenu : MonoBehaviour {
         charactorChoose.SetActive(false);
         charactorDescription.SetActive(false);
         charactorChooseButton.SetActive(false);
-        background.transform.position = Vector3.Lerp(background.transform.position, defaultPoint.position, 2f);
-        background.transform.rotation = defaultPoint.rotation;
+        characterTransform.SetActive(false);
+        backgroundAnimation.Play("CharacterMenu");
+    }
+
+    public void ScrollCharacterLeft()
+    {
+        AnimationState animationState;
+        if (currentAnimation=="ScrollThirdCharacter")
+        {
+            animationState = characterAnimation["ScrollThirdCharacter"];
+            characterAnimation.Play("ScrollThirdCharacter");
+            animationState.speed = 1;
+            animationState.time = 0f;
+            currentAnimation = "ScrollFouthCharacter";
+        }
+        else if (currentAnimation == "ScrollFouthCharacter")
+        {
+            animationState = characterAnimation["ScrollFouthCharacter"];
+            characterAnimation.Play("ScrollFouthCharacter");
+            animationState.speed = 1;
+            animationState.time = 0f;
+            currentAnimation = "ScrollFifthCharacter";
+        }
+        else if (currentAnimation == "ScrollFifthCharacter")
+        {
+            animationState = characterAnimation["ScrollFifthCharacter"];
+            characterAnimation.Play("ScrollFifthCharacter");
+            animationState.speed = 1;
+            animationState.time = 0f;
+            currentAnimation = "ScrollFirstCharacter";
+        }
+        else if (currentAnimation == "ScrollFirstCharacter")
+        {
+            animationState = characterAnimation["ScrollFirstCharacter"];
+            characterAnimation.Play("ScrollFirstCharacter");
+            animationState.speed = 1;
+            animationState.time = 0f;
+            currentAnimation = "ScrollSecondCharacter";
+        }
+        else if (currentAnimation == "ScrollSecondCharacter")
+        {
+            animationState = characterAnimation["ScrollSecondCharacter"];
+            characterAnimation.Play("ScrollSecondCharacter");
+            animationState.speed = 1;
+            animationState.time = 0f;
+            currentAnimation = "ScrollThirdCharacter";
+        }
+    }
+
+    public void ScrollCharacterRight()
+    {
+        AnimationState animationState;
+        if (currentAnimation == "ScrollThirdCharacter")
+        {
+            animationState = characterAnimation["ScrollSecondCharacter"];
+            characterAnimation.Play("ScrollSecondCharacter");
+            animationState.speed = -1;
+            animationState.time = animationState.clip.length;
+            currentAnimation = "ScrollSecondCharacter";
+        }
+        else if (currentAnimation == "ScrollFouthCharacter")
+        {
+            animationState = characterAnimation["ScrollThirdCharacter"];
+            characterAnimation.Play("ScrollThirdCharacter");
+            animationState.speed = -1;
+            animationState.time = animationState.clip.length;
+            currentAnimation = "ScrollThirdCharacter";
+        }
+        else if (currentAnimation == "ScrollFifthCharacter")
+        {
+            animationState = characterAnimation["ScrollFouthCharacter"];
+            characterAnimation.Play("ScrollFouthCharacter");
+            animationState.speed = -1;
+            animationState.time = animationState.clip.length;
+            currentAnimation = "ScrollFouthCharacter";
+        }
+        else if (currentAnimation == "ScrollFirstCharacter")
+        {
+            animationState = characterAnimation["ScrollFifthCharacter"];
+            characterAnimation.Play("ScrollFifthCharacter");
+            animationState.speed = -1;
+            animationState.time = animationState.clip.length;
+            currentAnimation = "ScrollFifthCharacter";
+        }
+        else if (currentAnimation == "ScrollSecondCharacter")
+        {
+            animationState = characterAnimation["ScrollFirstCharacter"];
+            characterAnimation.Play("ScrollFirstCharacter");
+            animationState.speed = -1;
+            animationState.time = animationState.clip.length;
+            currentAnimation = "ScrollFirstCharacter";
+        }
     }
 
 }
