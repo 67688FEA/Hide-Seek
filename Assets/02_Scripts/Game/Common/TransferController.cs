@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Collider))]
 public class TransferController : MonoBehaviour {
@@ -27,6 +28,11 @@ public class TransferController : MonoBehaviour {
             if (particle) particle.SetActive(true);
             other.gameObject.transform.position = destination.position;
             other.gameObject.transform.rotation = destination.rotation;
+            if (other.gameObject.layer == 14)
+            {
+                other.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                other.gameObject.GetComponent<Animator>().speed = 0f;
+            }
         }
     }
 

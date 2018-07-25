@@ -21,9 +21,9 @@ public class HideSeekMainMenu : MonoBehaviour {
 
     private Animation backgroundAnimation;
     private Animation characterAnimation;
-    private string playerName;
+    public static string playerName = "Normal Male";
+    public static string playerDescription = "Normal Male.";
     AsyncOperation async;
-    //private GameObject[] playerList;
     private SelectedCharacter[] playerList=new SelectedCharacter[5];
 
 
@@ -62,25 +62,25 @@ public class HideSeekMainMenu : MonoBehaviour {
 
     public void ConfirmCharacter()
     {
-        GetSelectedCharacter();
+        //GetSelectedCharacter();
         PlayerPrefs.SetString("PlayerName", playerName);
         //SceneManager.LoadScene("LoadingScene");
         StartCoroutine(LoadScene());
     }
 
-    private void GetSelectedCharacter()
-    {
-        //playerList = GameObject.FindGameObjectsWithTag("Player");
-        playerList = GameObject.FindObjectsOfType<SelectedCharacter>();
-        foreach (SelectedCharacter player in playerList)
-        {
-            if (player.selected)
-            {
-                playerName = player.playerName;
-                break;
-            }
-        }
-    }
+    //private void GetSelectedCharacter()
+    //{
+    //    //playerList = GameObject.FindGameObjectsWithTag("Player");
+    //    playerList = GameObject.FindObjectsOfType<SelectedCharacter>();
+    //    foreach (SelectedCharacter player in playerList)
+    //    {
+    //        if (player.selected)
+    //        {
+    //            playerName = player.playerName;
+    //            break;
+    //        }
+    //    }
+    //}
 
     IEnumerator LoadScene()
     {
