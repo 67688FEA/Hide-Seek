@@ -20,7 +20,7 @@ public class OpenDoor : MonoBehaviour {
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player"|| other.gameObject.layer == 14)
         {
             gameObject.GetComponent<MeshRenderer>().material = activeMaterial;
             openAnimator.SetBool("open", true);

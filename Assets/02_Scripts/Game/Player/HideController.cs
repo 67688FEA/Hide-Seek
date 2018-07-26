@@ -11,7 +11,7 @@ public class HideController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponentInChildren<NavMeshAgent>();
         agent.destination = transformTree.position;
         animator = GetComponent<Animator>();
         animator.SetFloat("Speed", agent.speed);

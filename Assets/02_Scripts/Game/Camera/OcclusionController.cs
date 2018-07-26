@@ -41,9 +41,12 @@ public class OcclusionController : MonoBehaviour {
         {
             if (hit[i].collider.gameObject.tag != "Player" && hit[i].collider.gameObject.layer != 12)//角色和边界
             {
-                //Debug.Log(hit[i].collider.gameObject.name);
-                colliderObject.Add(hit[i].collider.gameObject);
-                SetMaterialsColor(hit[i].collider.gameObject.GetComponent<Renderer>(), 0f);//置当前物体材质透明度
+                if (hit[i].collider.gameObject.GetComponent<Renderer>())
+                {
+                    //Debug.Log(hit[i].collider.gameObject.name);
+                    colliderObject.Add(hit[i].collider.gameObject);
+                    SetMaterialsColor(hit[i].collider.gameObject.GetComponent<Renderer>(), 0f);//置当前物体材质透明度
+                }
             }
         }
 

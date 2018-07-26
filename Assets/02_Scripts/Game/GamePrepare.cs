@@ -18,6 +18,7 @@ public class GamePrepare : MonoBehaviour {
         player.transform.parent = playerTransform;
         cameraController.enabled = true;
         occlusionController.enabled = true;
-
+        GlobalVariable.hiderTotal = 4;
+        GlobalVariable.hiderCurrent = 0;
     }
 }
