@@ -28,7 +28,7 @@ public class SeekerController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate() {
         if (inputable)
         {
             horizontal = Input.GetAxis("Horizontal");
@@ -47,23 +47,23 @@ public class SeekerController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (other.gameObject.layer == 14)
+        if (hit.gameObject.layer == 14)
         {
             inputable = false;
-            StartCoroutine(AttackHider(other));
+            StartCoroutine(AttackHider(hit));
         }
     }
 
-    IEnumerator AttackHider(Collider other)
+    IEnumerator AttackHider(ControllerColliderHit hit)
     {
         animator.SetTrigger("Attack");
-        other.gameObject.GetComponent<Animator>().SetTrigger("Death");
-        other.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        hit.gameObject.GetComponent<Animator>().SetTrigger("Death");
+        hit.gameObject.GetComponent<NavMeshAgent>().enabled = false;
         yield return delay;
         inputable = true;
-        other.gameObject.SetActive(false);
+        hit.gameObject.SetActive(false);
     }
 
 }
